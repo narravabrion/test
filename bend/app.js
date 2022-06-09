@@ -2,7 +2,7 @@ const express = require("express")
 const cors = require("cors")
 require("dotenv").config()
 const studentRoutes = require('./routes/student.routes')
-const subjectRoutes = require('./controllers/subject.controllers')
+const subjectRoutes = require('./routes/subject.routes')
 
 const app = express()
 

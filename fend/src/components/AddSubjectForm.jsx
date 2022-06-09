@@ -2,29 +2,31 @@ import React from "react"
 import { Formik, Form } from "formik"
 import * as Yup from "yup"
 import { TextInput, SelectInput } from "."
+import { useDispatch } from "react-redux"
+import { createSubject } from "../features/subject.slice"
 
 const AddSubjectForm = () => {
+	const dispatch = useDispatch()
 	return (
 		<>
 			<Formik
 				initialValues={{
 					subject: "",
-					cartegory: "", 
+					cartegory: "",
 				}}
 				validationSchema={Yup.object({
-					subject: Yup.string()
-						.max(40, "Must be 40 characters or less")
-						.required("Required"),
-					
+					subject: Yup.string().required("Required"),
+
 					cartegory: Yup.string()
-						.oneOf(["humanity", "science", "industrial"], "Invalid cartegory")
+						.oneOf(
+							["humanity", "science", "industrial", "language"],
+							"Invalid cartegory"
+						)
 						.required("Required"),
 				})}
 				onSubmit={(values, { setSubmitting }) => {
-					setTimeout(() => {
-						alert(JSON.stringify(values, null, 2))
-						setSubmitting(false)
-					}, 400)
+					dispatch(createSubject(values))
+					setSubmitting(false)
 				}}
 			>
 				<Form className='border rounded p-1'>
@@ -34,14 +36,12 @@ const AddSubjectForm = () => {
 						type='text'
 						placeholder='math'
 					/>
-
-			
-
 					<SelectInput label='Cartegory' name='cartegory'>
 						<option value=''>Select a cartegory</option>
 						<option value='humanity'>Humanity</option>
 						<option value='science'>Science</option>
 						<option value='industrial'>Industrial</option>
+						<option value='language'>Language</option>
 					</SelectInput>
 
 					<button

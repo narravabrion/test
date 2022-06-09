@@ -14,7 +14,7 @@ const SelectInput = ({ label, ...props }) => {
 				</label>
 				<select className='border rounded ' {...field} {...props} />
 				{meta.touched && meta.error ? (
-					<div className='error'>{meta.error}</div>
+					<div className='bg-red-500/50 rounded text-xs px-1 w-11/12 mt-1'>{meta.error}</div>
 				) : null}
 			</div>
 		</>
